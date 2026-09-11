@@ -16,16 +16,13 @@ Private onboarding bundle for the **desk** machine's Windows side (OMEN dual-boo
 | `zerotier/moons.env` | Dawn/dusk moon root IDs |
 | `ssh/cursor-agent.pub` | Ed25519 key the Cursor agent uses to SSH in |
 | `scripts/setup.ps1` | One-shot Windows setup (ZT + OpenSSH) |
+| `STATUS.md` | Live onboarding status for agents (read this first) |
 
 ## On the Windows desktop
 
 1. Clone this repo (or copy the folder onto the machine).
 2. Right-click `scripts/setup.cmd` → **Run as administrator** (or run `setup.ps1` elevated).
-3. On **dawn** (mesh controller), admit the node:
-
-   ```bash
-   zerotier-members --network-id 2ca2fd5d9eab729d allow 07c2fd60d2
-   ```
+3. ~~On **dawn** (mesh controller), admit the node~~ — **done** (2026-09-11). See `STATUS.md`.
 
 4. Add the ULA to `modules/zt-addrs.nix` in nix-production (suggested key `desk-win`):
 
