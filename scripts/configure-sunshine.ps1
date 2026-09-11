@@ -24,6 +24,7 @@ Write-Host "Wrote $sunshineConf"
 Write-Host "  origin_pin_allowed = wan   # required for PIN over ZeroTier"
 Write-Host ""
 Write-Host "Restart Sunshine, then remove old paired clients in https://localhost:47990"
-Write-Host "Add firewall rules for the ZeroTier adapter (see scripts/sunshine-firewall.ps1)"
+Write-Host "Then run fix-zerotier-windows.ps1 for mesh inbound (see ZEROTIER-WINDOWS.md)"
+Write-Host "Add firewall rules for Sunshine (see scripts/sunshine-firewall.ps1)"
 
 Restart-Service SunshineService -ErrorAction SilentlyContinue
