@@ -20,7 +20,7 @@ $NetworkId = $cfg.ZT_NETWORK_ID
 $MoonDawn = $cfg.ZT_MOON_DAWN
 $MoonDusk = $cfg.ZT_MOON_DUSK
 $PubKey = (Get-Content (Join-Path $RepoRoot 'ssh\cursor-agent.pub') -Raw).Trim()
-$SshUser = if ($cfg.SSH_UNIX_NAME) { $cfg.SSH_UNIX_NAME } else { 'ender' }
+$SshUser = if ($cfg.SSH_UNIX_NAME) { $cfg.SSH_UNIX_NAME } else { 'ai' }
 
 Write-Host "==> Installing ZeroTier One (if missing)"
 $ztExe = Join-Path $env:TEMP 'ZeroTier One.msi'
