@@ -1,5 +1,26 @@
 # Moonlight ↔ Sunshine over ZeroTier
 
+## Where the PIN comes from
+
+**Sunshine does not generate the PIN.** Moonlight does. Sunshine only shows "pairing request received" and waits for you to type the PIN into its web UI.
+
+- **Moonlight GUI:** click the locked PC → a dialog shows a **4-digit PIN** → type that into Sunshine → PIN tab.
+- **Moonlight CLI (recommended):** you pick the PIN so both sides match:
+
+  ```bash
+  moonlight pair 192.168.68.109 --pin 4829
+  ```
+
+  Immediately enter **4829** in Sunshine web UI → PIN tab → Send.
+
+If Sunshine shows multiple pairing requests, stuck sessions are blocking new ones. On Windows (elevated):
+
+```powershell
+.\scripts\restart-sunshine.ps1
+```
+
+Then do **one** pair attempt only.
+
 ## Symptom
 
 Sunshine web UI accepts the PIN ("success"), but Moonlight reports:
@@ -31,23 +52,20 @@ Then open https://localhost:47990 → **Remove all paired clients**.
 
 ### thin (NixOS client)
 
-1. Moonlight → remove `DESKTOP-IS44VP9` if present.
-2. **Add PC manually** with address `fd2c:a2fd:5d9e:ab72:9d99:9307:c2fd:60d2` (no brackets in GUI; CLI accepts bare IPv6).
-3. Pair from terminal (more reliable than GUI):
+**Pair on LAN first** (works today). Move to ZeroTier address after pairing succeeds.
+
+1. Windows: `.\scripts\restart-sunshine.ps1` (clears stuck sessions).
+2. Moonlight → remove `DESKTOP-IS44VP9` if present.
+3. One pairing attempt:
 
    ```bash
-   moonlight pair fd2c:a2fd:5d9e:ab72:9d99:9307:c2fd:60d2
+   moonlight pair 192.168.68.109 --pin 4829
    ```
 
-   Moonlight prints a 4-digit PIN. Enter it in Sunshine web UI → PIN tab **while the pair command is waiting** (do not use an old PIN).
+   Within a few seconds, Sunshine web UI → PIN tab → enter **4829** → Send.
 
-4. Or pass PIN directly:
-
-   ```bash
-   moonlight pair fd2c:a2fd:5d9e:ab72:9d99:9307:c2fd:60d2 --pin 1234
-   ```
-
-   (Enter `1234` in Sunshine web UI at the same time.)
+4. After paired, add ZT address in Moonlight host settings for away-from-home streaming:
+   `fd2c:a2fd:5d9e:ab72:9d99:9307:c2fd:60d2`
 
 ### Verify
 
