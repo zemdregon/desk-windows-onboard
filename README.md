@@ -37,7 +37,7 @@ Private onboarding bundle for the **desk** machine's Windows side (OMEN dual-boo
 
    ```bash
    ping -6 fd2c:a2fd:5d9e:ab72:9d99:9307:c2fd:60d2
-   ssh ender@fd2c:a2fd:5d9e:ab72:9d99:9307:c2fd:60d2
+   ssh ai@fd2c:a2fd:5d9e:ab72:9d99:9307:c2fd:60d2
    ```
 
 ## Agent SSH config (Linux side)
@@ -47,7 +47,7 @@ Add to `~/.ssh/config` after admit:
 ```
 Host desk-win
   HostName fd2c:a2fd:5d9e:ab72:9d99:9307:c2fd:60d2
-  User ender
+  User ai
   IdentityFile ~/.ssh/id_ed25519
   StrictHostKeyChecking accept-new
   BatchMode yes
