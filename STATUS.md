@@ -71,3 +71,21 @@ SSH to dawn: `ender@fd2c:a2fd:5d9e:ab72:9d99:932c:a2fd:5d9e`
 | desk (Windows) | `07c2fd60d2` | `fd2c:a2fd:5d9e:ab72:9d99:9307:c2fd:60d2` |
 
 Only one OS boots at a time on the OMEN chassis; identities are intentionally separate.
+
+## Windows-side diagnosis (2026-09-11)
+
+ZeroTier initially reported the assigned ULA in `listnetworks`, but Windows had
+only a link-local IPv6 address on the ZeroTier adapter. Restarting
+`ZeroTierOneService` installed the managed address:
+
+```text
+fd2c:a2fd:5d9e:ab72:9d99:9307:c2fd:60d2/88  Preferred
+```
+
+After the restart, ZeroTier reported `ONLINE`. The host also has `sshd` running
+automatically on TCP/22, a valid `sshd -t` configuration, an enabled OpenSSH
+firewall rule, and the trusted Cursor key matching
+`C:\ProgramData\ssh\administrators_authorized_keys`.
+
+If SSH still times out remotely, restart `ZeroTierOneService` once and retry
+the mesh address before changing SSH configuration.
